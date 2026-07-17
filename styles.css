@@ -391,3 +391,16 @@ h2.big {
 @media (min-width: 700px) {
   .dream-grid { grid-template-columns: repeat(3, 1fr); }
 }
+
+.letter p { font-size: 1.02rem; }
+.wish-list { display: grid; gap: 0.75rem; margin: 0.4rem 0 0.2rem; }
+.wish {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(240,210,154,0.18);
+  border-radius: 16px;
+  padding: 0.95rem 1rem;
+  line-height: 1.5;
+  color: #efe6d8;
+  animation: fadeUp 0.55s ease both;
+}
+.lead.wide { max-width: 42ch; }
