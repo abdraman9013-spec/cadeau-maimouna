@@ -424,6 +424,40 @@ h2.big {
 .wish:nth-child(8) { animation-delay: 0.35s; }
 .heart-pulse { display: inline-block; animation: pulseText 1.1s ease infinite; }
 .lead.wide { max-width: 42ch; }
+.sound-toggle {
+  position: fixed;
+  right: 12px;
+  bottom: 14px;
+  z-index: 70;
+  border: 1px solid rgba(240,210,154,0.35);
+  background: rgba(11,18,32,0.82);
+  color: var(--gold2);
+  border-radius: 999px;
+  padding: 0.55rem 0.9rem;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+.birthday-yt {
+  position: fixed;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  left: -9999px;
+  bottom: 0;
+}
+#dreamPhoto {
+  width: 100%;
+  max-height: 58vh;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.45);
+  border: 1px solid rgba(240,210,154,0.28);
+  animation: revealImg 0.9s ease both;
+}
 
 </style>
 </head>
@@ -438,8 +472,8 @@ h2.big {
   <h1 class="hero-name">Maimouna</h1>
   <p class="sub">Azibert Taha</p>
   <p class="lead wide">Quelqu’un a préparé quelque chose juste pour toi. Prends ton temps… chaque page est un cadeau.</p>
-  <p class="hint">Active le son du téléphone — il y a une voix douce et des applaudissements.</p>
-  <button class="btn gold" data-next="game1">Ouvrir le cadeau</button>
+  <p class="hint">Active le son du téléphone — vraie chanson Joyeux anniversaire + applaudissements.</p>
+  <button class="btn gold" data-next="game1">Ouvrir le cadeau (avec musique)</button>
 </section>
 
 <section class="screen" data-screen="game1">
@@ -546,10 +580,10 @@ h2.big {
   <div class="dream-grid">
     <button class="dream" data-dream="voiture">Voiture</button>
     <button class="dream" data-dream="maison">Maison</button>
-    <button class="dream" data-dream="iphone">iPhone</button>
+    <button class="dream" data-dream="samsung">Samsung S26 Ultra</button>
     <button class="dream" data-dream="voyage">Voyage</button>
     <button class="dream" data-dream="bijoux">Bijoux</button>
-      <button class="dream" data-dream="bonheur">Bonheur · Dadju</button>
+    <button class="dream" data-dream="bonheur">Bonheur · Dadju</button>
   </div>
   <p class="hint">Explore plusieurs rêves… le message d’AAG t’attend après.</p>
   <button class="btn soft hidden" id="toLetter" data-next="letter">Lire le long message d’AAG</button>
@@ -560,13 +594,17 @@ h2.big {
   <p class="eyebrow wow" id="dreamEyebrow">Cadeau rêve</p>
   <h2 id="dreamTitle">Pour Maimouna</h2>
   <p class="lead" id="dreamText"></p>
-  <div class="video-wrap">
+  <div class="video-wrap" id="dreamVideoWrap">
     <iframe id="dreamVideo" title="Reve" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
+  <img class="hero-img hidden" id="dreamPhoto" alt="Cadeau pour Maimouna" />
   <div class="name-overlay">Cadeau pour<br/><span>MAIMOUNA AZIBERT TAHA</span><br/><small>de la part d’AAG</small></div>
   <button class="btn gold" id="moreDreams" type="button">Choisir un autre rêve</button>
   <button class="btn soft" data-next="letter">Ou lire le message maintenant</button>
 </section>
+
+<button type="button" id="soundToggle" class="sound-toggle" aria-label="Couper le son">Son ON</button>
+<iframe id="birthdayYT" class="birthday-yt" title="Joyeux anniversaire" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 <section class="screen" data-screen="letter">
   <p class="eyebrow">Message d’AAG</p>
@@ -624,33 +662,33 @@ h2.big {
     "flowers","chocolates","queen","cake","wishes","dreams","dreamDetail",
     "letter","encore","finale"
   ];
-  const CDN = "https://cdn.jsdelivr.net/gh/abdraman9013-spec/cadeau-maimouna@main";
+  const CDN = "assets";
   const YT = (id) => "https://www.youtube.com/embed/" + id + "?autoplay=1&rel=0&modestbranding=1&playsinline=1";
-  // Videos verified via YouTube oEmbed (real Dubai / luxury / Dadju)
+  const BIRTHDAY_SONG = "ZJTC9LuQQwY"; // vraie chanson Joyeux anniversaire
   const dreams = {
     voiture: {
       title: "Tes supercars a Dubai",
-      text: "Les plus belles voitures du monde, dans les rues de Dubai. Avec ton nom en pensee : Maimouna.",
+      text: "Les plus belles voitures du monde, dans les rues de Dubai. Pour toi, Maimouna.",
       video: YT("fZm-pFIqKYA")
     },
     maison: {
       title: "Ta villa Palm Jumeirah",
-      text: "Une vraie demeure de reve a Dubai, digne d'une reine. Imagine ton nom sur la porte.",
+      text: "Une vraie demeure de reve a Dubai, digne d'une reine.",
       video: YT("UnFoKho-aio")
     },
-    iphone: {
-      title: "Ton luxe a Dubai Mall",
-      text: "Shopping de reve a Dubai. L'iPhone, la mode, le luxe... pour MAIMOUNA AZIBERT TAHA.",
-      video: YT("baiwtPJJDF4")
+    samsung: {
+      title: "Ton Samsung Galaxy S26 Ultra",
+      text: "Le telephone le plus magique. Simple. Puissant. Pour MAIMOUNA AZIBERT TAHA.",
+      photo: CDN + "/samsung-s26-ultra-maimouna.jpg"
     },
     voyage: {
-      title: "Dubai t'attend",
-      text: "Burj Khalifa, Palm Jumeirah, la vraie vie de reve. Et un jour Istanbul aussi...",
-      video: YT("0TyrhDJOu54")
+      title: "Dubai en 4 minutes",
+      text: "Burj Khalifa, Palm, desert, vraie vie de reve. Une video courte et magique.",
+      video: YT("IdejM6wCkxA")
     },
     bijoux: {
       title: "Tes bijoux a Dubai",
-      text: "Le Gold Souk de Dubai : or, diamants, eclat. Parce qu'une reine merite de briller.",
+      text: "Le Gold Souk de Dubai : or, diamants, eclat.",
       video: YT("R0bhLrmEsqk")
     },
     bonheur: {
@@ -661,44 +699,48 @@ h2.big {
   };
   let visitedDreams = 0;
   let audioReady = false;
+  let musicOn = true;
   const applause = new Audio("https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3");
   applause.volume = 0.55;
   const applause2 = new Audio("https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3");
   applause2.volume = 0.45;
+  const birthdayMp3 = new Audio(CDN + "/joyeux-anniversaire.mp3");
+  birthdayMp3.loop = true;
+  birthdayMp3.volume = 0.5;
+  const birthdayYT = document.getElementById("birthdayYT");
+  const soundToggle = document.getElementById("soundToggle");
+  const dreamVideoWrap = document.getElementById("dreamVideoWrap");
+  const dreamPhoto = document.getElementById("dreamPhoto");
 
-  const birthdayLines = [
-    "Joyeux anniversaire Maimouna",
-    "Joyeux anniversaire Mai mou na",
-    "Joyeux anniversaire, Maimouna Azibert Taha",
-    "Joyeux anniversaire ma belle Maimouna"
-  ];
-  let lineIdx = 0;
-
+  function startBirthdayMusic() {
+    if (!audioReady || !musicOn) return;
+    birthdayMp3.play().catch(() => {});
+    // vraie chanson complete en fond (boucle douce)
+    if (birthdayYT && !birthdayYT.src.includes(BIRTHDAY_SONG)) {
+      birthdayYT.src = "https://www.youtube.com/embed/" + BIRTHDAY_SONG + "?autoplay=1&loop=1&playlist=" + BIRTHDAY_SONG + "&controls=0&rel=0&modestbranding=1";
+    }
+  }
+  function pauseBirthdayMusic() {
+    try { birthdayMp3.pause(); } catch (e) {}
+    if (birthdayYT) birthdayYT.src = "";
+  }
+  function softBirthday() {
+    if (!musicOn) return;
+    birthdayMp3.volume = 0.22;
+    startBirthdayMusic();
+  }
+  function fullBirthday() {
+    if (!musicOn) return;
+    birthdayMp3.volume = 0.55;
+    startBirthdayMusic();
+  }
   function unlockAudio() {
     audioReady = true;
-    try { applause.load(); applause2.load(); } catch (e) {}
+    try { applause.load(); applause2.load(); birthdayMp3.load(); } catch (e) {}
+    fullBirthday();
   }
-
-  function speakBirthday(soft) {
-    if (!audioReady || !window.speechSynthesis) return;
-    try {
-      window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(birthdayLines[lineIdx % birthdayLines.length]);
-      lineIdx += 1;
-      u.lang = "fr-FR";
-      u.rate = soft ? 0.88 : 0.95;
-      u.pitch = 1.15;
-      u.volume = soft ? 0.65 : 0.8;
-      const voices = window.speechSynthesis.getVoices();
-      const fr = voices.find((v) => /fr(-|_|$)/i.test(v.lang) && /female|google|hortense|julie|marie|amelie/i.test(v.name))
-        || voices.find((v) => /fr(-|_|$)/i.test(v.lang));
-      if (fr) u.voice = fr;
-      window.speechSynthesis.speak(u);
-    } catch (e) {}
-  }
-
   function playApplause() {
-    if (!audioReady) return;
+    if (!audioReady || !musicOn) return;
     try {
       applause.currentTime = 0;
       applause.play().catch(() => {});
@@ -708,7 +750,6 @@ h2.big {
       }, 350);
     } catch (e) {}
   }
-
   function go(name) {
     const target = document.querySelector('[data-screen="' + name + '"]');
     if (!target) return;
@@ -717,17 +758,16 @@ h2.big {
     window.scrollTo({ top: 0, behavior: "smooth" });
     const idx = Math.max(0, order.indexOf(name));
     progress.style.width = Math.round(((idx + 1) / order.length) * 100) + "%";
+    if (name !== "dreamDetail") {
+      stopDreamMedia();
+      fullBirthday();
+    }
     if (name === "flowers" || name === "wishes" || name === "encore" || name === "cake") {
       spawnPetals(28);
       playApplause();
-      speakBirthday(true);
+      fullBirthday();
     }
-    if (["queen","chocolates","letter","finale","intro"].includes(name)) {
-      burst();
-      if (name !== "intro") speakBirthday(true);
-    }
-    if (name === "eyes" || name === "question") speakBirthday(true);
-    if (name !== "dreamDetail") stopVideo();
+    if (["queen","chocolates","letter","finale"].includes(name)) burst();
   }
   function burst() {
     const fx = document.getElementById("fx");
@@ -750,9 +790,14 @@ h2.big {
     }
     setTimeout(() => { box.innerHTML = ""; }, 9000);
   }
-  function stopVideo() {
+  function stopDreamMedia() {
     const iframe = document.getElementById("dreamVideo");
     if (iframe) iframe.src = "";
+    if (dreamPhoto) {
+      dreamPhoto.classList.add("hidden");
+      dreamPhoto.removeAttribute("src");
+    }
+    if (dreamVideoWrap) dreamVideoWrap.classList.remove("hidden");
   }
   document.querySelectorAll("[data-next]").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -768,42 +813,61 @@ h2.big {
       chip.classList.add("selected");
       document.getElementById("afterGuess").classList.remove("hidden");
       burst();
-      speakBirthday(true);
     });
   });
   const toLetter = document.getElementById("toLetter");
   document.querySelectorAll(".dream").forEach((btn) => {
     btn.addEventListener("click", () => {
       unlockAudio();
-      const data = dreams[btn.getAttribute("data-dream")];
+      const key = btn.getAttribute("data-dream");
+      const data = dreams[key];
       if (!data) return;
-      document.getElementById("dreamEyebrow").textContent = "Waouh — vrai cadeau rêve";
+      document.getElementById("dreamEyebrow").textContent = "Waouh — cadeau rêve";
       document.getElementById("dreamTitle").textContent = data.title;
       document.getElementById("dreamText").textContent = data.text;
-      document.getElementById("dreamVideo").src = data.video;
+      const iframe = document.getElementById("dreamVideo");
+      if (data.photo) {
+        softBirthday();
+        if (dreamVideoWrap) dreamVideoWrap.classList.add("hidden");
+        if (iframe) iframe.src = "";
+        dreamPhoto.src = data.photo;
+        dreamPhoto.classList.remove("hidden");
+      } else {
+        pauseBirthdayMusic();
+        if (dreamVideoWrap) dreamVideoWrap.classList.remove("hidden");
+        dreamPhoto.classList.add("hidden");
+        iframe.src = data.video;
+      }
       visitedDreams += 1;
       toLetter.classList.remove("hidden");
       toLetter.textContent = visitedDreams >= 2
         ? "Lire le long message d'AAG"
         : "Encore un rêve... ou lire le message";
       burst();
-      if (btn.getAttribute("data-dream") !== "bonheur") speakBirthday(true);
       go("dreamDetail");
     });
   });
-  document.getElementById("backDreams").addEventListener("click", () => { stopVideo(); go("dreams"); });
-  document.getElementById("moreDreams").addEventListener("click", () => { stopVideo(); go("dreams"); });
+  document.getElementById("backDreams").addEventListener("click", () => { stopDreamMedia(); go("dreams"); });
+  document.getElementById("moreDreams").addEventListener("click", () => { stopDreamMedia(); go("dreams"); });
   document.getElementById("eyesBtn").addEventListener("click", () => {
     unlockAudio();
     spawnPetals(22);
     playApplause();
   });
-  if (window.speechSynthesis) {
-    window.speechSynthesis.onvoiceschanged = () => {};
-  }
+  soundToggle.addEventListener("click", () => {
+    musicOn = !musicOn;
+    soundToggle.textContent = musicOn ? "Son ON" : "Son OFF";
+    if (musicOn) {
+      unlockAudio();
+      fullBirthday();
+    } else {
+      pauseBirthdayMusic();
+      try { applause.pause(); applause2.pause(); } catch (e) {}
+    }
+  });
   progress.style.width = Math.round((1 / order.length) * 100) + "%";
   document.querySelectorAll("img[data-cdn]").forEach((img) => {
-    img.src = CDN + "/assets/" + img.getAttribute("data-cdn");
+    img.src = CDN + "/" + img.getAttribute("data-cdn");
   });
 })();
 
