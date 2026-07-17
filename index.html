@@ -1,160 +1,738 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#0b1220" />
-  <title>Pour toi, Maimouna</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/abdraman9013-spec/cadeau-maimouna@main/styles.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0b1220" />
+<title>Pour toi, Maimouna</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg: #0b1220;
+  --bg2: #152238;
+  --ink: #f6efe4;
+  --muted: #c9b8a0;
+  --gold: #d4a85a;
+  --gold2: #f0d29a;
+  --rose: #e8b4b8;
+  --deep: #071018;
+  --card: rgba(255, 255, 255, 0.06);
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Manrope", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  min-height: 100%;
+  background:
+    radial-gradient(1200px 700px at 20% -10%, rgba(212, 168, 90, 0.22), transparent 55%),
+    radial-gradient(900px 600px at 100% 10%, rgba(232, 180, 184, 0.14), transparent 50%),
+    linear-gradient(165deg, var(--bg), var(--deep) 60%, #101a2c);
+  color: var(--ink);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 3px 3px;
+  opacity: 0.35;
+  z-index: 0;
+}
+
+.progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  z-index: 50;
+  background: rgba(255,255,255,0.08);
+}
+.progress span {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--gold), var(--rose));
+  transition: width 0.45s ease;
+}
+
+.screen {
+  display: none;
+  position: relative;
+  z-index: 1;
+  min-height: 100dvh;
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1.2rem, 4vw, 2rem) 3rem;
+  max-width: 720px;
+  margin: 0 auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 1rem;
+  animation: fadeUp 0.65s ease both;
+}
+.screen.active { display: flex; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); filter: blur(4px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+
+.glow {
+  position: absolute;
+  width: 280px; height: 280px;
+  top: 8%; left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(212,168,90,0.35), transparent 70%);
+  filter: blur(10px);
+  pointer-events: none;
+  z-index: -1;
+  animation: breathe 4s ease-in-out infinite;
+}
+@keyframes breathe {
+  0%, 100% { opacity: 0.55; transform: translateX(-50%) scale(1); }
+  50% { opacity: 1; transform: translateX(-50%) scale(1.12); }
+}
+
+.eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold2);
+  font-weight: 600;
+}
+.eyebrow.wow {
+  color: var(--rose);
+  animation: pulseText 1.2s ease infinite;
+}
+@keyframes pulseText {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+h1, h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+}
+.hero-name {
+  font-size: clamp(3.8rem, 16vw, 6.5rem);
+  background: linear-gradient(120deg, #fff7e8, var(--gold2) 45%, var(--rose));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 40px rgba(212,168,90,0.25);
+}
+.sub {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  color: var(--muted);
+  margin-top: -0.4rem;
+}
+h2 {
+  font-size: clamp(2rem, 8vw, 3.2rem);
+}
+h2.big {
+  font-size: clamp(2.1rem, 8.5vw, 3.4rem);
+}
+.accent {
+  color: var(--gold2);
+  font-size: 1.15em;
+}
+.lead {
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.55;
+  max-width: 34ch;
+}
+
+.btn {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 0.95rem 1.4rem;
+  font: inherit;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  margin-top: 0.6rem;
+  align-self: flex-start;
+}
+.btn:active { transform: scale(0.97); }
+.btn.gold {
+  background: linear-gradient(135deg, var(--gold2), var(--gold));
+  color: #1a1208;
+  box-shadow: 0 10px 30px rgba(212,168,90,0.28);
+}
+.btn.gold:hover { box-shadow: 0 14px 36px rgba(212,168,90,0.4); }
+.btn.soft {
+  background: var(--card);
+  color: var(--ink);
+  border: 1px solid rgba(240,210,154,0.25);
+}
+.btn.huge {
+  padding: 1.15rem 1.6rem;
+  font-size: 1.05rem;
+}
+.hidden { display: none !important; }
+
+.orb {
+  width: min(46vw, 180px);
+  height: min(46vw, 180px);
+  border-radius: 50%;
+  border: 1px solid rgba(240,210,154,0.45);
+  background:
+    radial-gradient(circle at 35% 30%, rgba(255,255,255,0.35), transparent 35%),
+    radial-gradient(circle at 50% 50%, rgba(212,168,90,0.55), rgba(11,18,32,0.2) 70%);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 4.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  align-self: center;
+  margin: 1.5rem 0;
+  box-shadow: 0 0 0 0 rgba(212,168,90,0.35);
+  animation: orbPulse 2s ease-in-out infinite;
+  transition: transform 0.2s ease;
+}
+.orb:active { transform: scale(0.94); }
+.orb.pulse { animation-duration: 1.2s; }
+@keyframes orbPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212,168,90,0.4); }
+  50% { box-shadow: 0 0 0 22px rgba(212,168,90,0); }
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin: 0.5rem 0 0.2rem;
+}
+.chip {
+  border: 1px solid rgba(240,210,154,0.28);
+  background: var(--card);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  font: inherit;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+.chip:hover, .chip.selected {
+  background: rgba(212,168,90,0.18);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.hero-img {
+  width: 100%;
+  max-height: 52vh;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.45);
+  border: 1px solid rgba(240,210,154,0.2);
+  animation: revealImg 0.9s ease both;
+}
+@keyframes revealImg {
+  from { opacity: 0; transform: scale(0.96) translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+.name-banner {
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  line-height: 1.25;
+  padding: 1rem;
+  border: 1px solid rgba(240,210,154,0.25);
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(212,168,90,0.12), transparent);
+}
+.name-banner strong {
+  font-size: 2rem;
+  color: var(--gold2);
+}
+
+.dream-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 0.4rem;
+}
+.dream {
+  border: 1px solid rgba(240,210,154,0.22);
+  background: linear-gradient(160deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+  color: var(--ink);
+  border-radius: 18px;
+  padding: 1.15rem 0.8rem;
+  font: inherit;
+  font-weight: 600;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  min-height: 72px;
+}
+.dream:hover {
+  transform: translateY(-3px) scale(1.02);
+  border-color: var(--gold);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.28);
+}
+.hint {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.video-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(240,210,154,0.25);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  background: #000;
+}
+.video-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.name-overlay {
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  line-height: 1.3;
+  padding: 1rem;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(212,168,90,0.18), rgba(232,180,184,0.1));
+  border: 1px solid rgba(240,210,154,0.28);
+  animation: glowCard 2.2s ease-in-out infinite;
+}
+.name-overlay span {
+  display: inline-block;
+  font-size: 1.7rem;
+  color: var(--gold2);
+  letter-spacing: 0.04em;
+}
+.name-overlay small {
+  display: block;
+  margin-top: 0.35rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+@keyframes glowCard {
+  0%, 100% { box-shadow: 0 0 0 rgba(212,168,90,0); }
+  50% { box-shadow: 0 0 28px rgba(212,168,90,0.25); }
+}
+
+.back {
+  align-self: flex-start;
+  background: transparent;
+  border: 0;
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
+  margin-bottom: 0.2rem;
+}
+
+.letter {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(240,210,154,0.18);
+  border-radius: 20px;
+  padding: 1.35rem 1.25rem;
+  display: grid;
+  gap: 0.9rem;
+  line-height: 1.65;
+  color: #efe6d8;
+}
+.letter strong { color: var(--gold2); }
+.sign {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--gold2);
+  margin-top: 0.3rem;
+}
+.big-sign {
+  font-size: 2.4rem;
+  text-align: center;
+  align-self: center;
+}
+
+.petals {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  overflow: hidden;
+}
+.petal {
+  position: absolute;
+  top: -10%;
+  width: 14px;
+  height: 18px;
+  background: radial-gradient(circle at 30% 30%, #ffd6d9, #e8a0a8 60%, #c97b86);
+  border-radius: 70% 30% 70% 30%;
+  opacity: 0.85;
+  animation: fall linear forwards;
+}
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(540deg); opacity: 0.15; }
+}
+
+#fx .burst {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  background: radial-gradient(circle at center, rgba(240,210,154,0.35), transparent 45%);
+  animation: burst 0.8s ease forwards;
+}
+@keyframes burst {
+  from { opacity: 0; }
+  30% { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@media (min-width: 700px) {
+  .dream-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+
+.letter p { font-size: 1.02rem; }
+.wish-list { display: grid; gap: 0.75rem; margin: 0.4rem 0 0.2rem; }
+.wish {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(240,210,154,0.18);
+  border-radius: 16px;
+  padding: 0.95rem 1rem;
+  line-height: 1.5;
+  color: #efe6d8;
+  animation: fadeUp 0.55s ease both;
+}
+.wish:nth-child(2) { animation-delay: 0.05s; }
+.wish:nth-child(3) { animation-delay: 0.1s; }
+.wish:nth-child(4) { animation-delay: 0.15s; }
+.wish:nth-child(5) { animation-delay: 0.2s; }
+.wish:nth-child(6) { animation-delay: 0.25s; }
+.wish:nth-child(7) { animation-delay: 0.3s; }
+.wish:nth-child(8) { animation-delay: 0.35s; }
+.heart-pulse { display: inline-block; animation: pulseText 1.1s ease infinite; }
+.lead.wide { max-width: 42ch; }
+
+</style>
 </head>
 <body>
-  <div id="fx" aria-hidden="true"></div>
-  <div class="progress" id="progress"><span></span></div>
+<div id="fx" aria-hidden="true"></div>
+<div class="progress" id="progress"><span></span></div>
+<div class="petals" id="petals"></div>
 
-  <section class="screen active" data-screen="intro">
-    <div class="glow"></div>
-    <p class="eyebrow">18 juillet · Cadeau secret</p>
-    <h1 class="hero-name">Maimouna</h1>
-    <p class="sub">Azibert Taha</p>
-    <p class="lead">Quelqu’un a préparé quelque chose juste pour toi.<br/>Ce n’est pas un simple message…</p>
-    <button class="btn gold" data-next="game1">Ouvrir le cadeau</button>
-  </section>
+<section class="screen active" data-screen="intro">
+  <div class="glow"></div>
+  <p class="eyebrow">18 juillet · Cadeau secret</p>
+  <h1 class="hero-name">Maimouna</h1>
+  <p class="sub">Azibert Taha</p>
+  <p class="lead wide">Quelqu’un a préparé quelque chose juste pour toi. Prends ton temps… chaque page est un cadeau.</p>
+  <button class="btn gold" data-next="game1">Ouvrir le cadeau</button>
+</section>
 
-  <section class="screen" data-screen="game1">
-    <p class="eyebrow">Étape 1 / 3</p>
-    <h2>Touche le <span class="accent">1</span></h2>
-    <p class="lead">Fais attention… chaque touche ouvre une porte.</p>
-    <button class="orb" data-next="game2" aria-label="Toucher 1">1</button>
-  </section>
+<section class="screen" data-screen="game1">
+  <p class="eyebrow">Étape 1 / 3</p>
+  <h2>Touche le <span class="accent">1</span></h2>
+  <p class="lead">Chaque touche ouvre une porte vers toi.</p>
+  <button class="orb" data-next="game2">1</button>
+</section>
 
-  <section class="screen" data-screen="game2">
-    <p class="eyebrow">Étape 2 / 3</p>
-    <h2>Maintenant le <span class="accent">2</span></h2>
-    <p class="lead">Tu es déjà plus proche du secret.</p>
-    <button class="orb" data-next="gameNext" aria-label="Toucher 2">2</button>
-  </section>
+<section class="screen" data-screen="game2">
+  <p class="eyebrow">Étape 2 / 3</p>
+  <h2>Maintenant le <span class="accent">2</span></h2>
+  <p class="lead">Tu es déjà plus proche du secret.</p>
+  <button class="orb" data-next="gameNext">2</button>
+</section>
 
-  <section class="screen" data-screen="gameNext">
-    <p class="eyebrow">Presque…</p>
-    <h2>Page suivante</h2>
-    <p class="lead">Continue. Le vrai cadeau n’est pas encore là.</p>
-    <button class="btn gold" data-next="game3">Page suivante →</button>
-  </section>
+<section class="screen" data-screen="gameNext">
+  <p class="eyebrow">Presque…</p>
+  <h2>Page suivante</h2>
+  <p class="lead">Continue. Le vrai cadeau n’est pas encore là.</p>
+  <button class="btn gold" data-next="game3">Page suivante</button>
+</section>
 
-  <section class="screen" data-screen="game3">
-    <p class="eyebrow">Étape 3 / 3</p>
-    <h2>Dernier chiffre : <span class="accent">3</span></h2>
-    <p class="lead">Après ça… la question.</p>
-    <button class="orb pulse" data-next="question" aria-label="Toucher 3">3</button>
-  </section>
+<section class="screen" data-screen="game3">
+  <p class="eyebrow">Étape 3 / 3</p>
+  <h2>Dernier chiffre : <span class="accent">3</span></h2>
+  <p class="lead">Après ça… la question.</p>
+  <button class="orb pulse" data-next="question">3</button>
+</section>
 
-  <section class="screen" data-screen="question">
-    <p class="eyebrow">Question</p>
-    <h2 class="big">Tu penses que cette personne t’a préparé quoi&nbsp;??</h2>
-    <div class="chips" id="guessChips">
-      <button type="button" class="chip">Un message ?</button>
-      <button type="button" class="chip">Des fleurs ?</button>
-      <button type="button" class="chip">Un gâteau ?</button>
-      <button type="button" class="chip">Plus que ça…</button>
-    </div>
-    <button class="btn gold hidden" id="afterGuess" data-next="eyes">Je veux savoir</button>
-  </section>
+<section class="screen" data-screen="question">
+  <p class="eyebrow">Question</p>
+  <h2 class="big">Tu penses que cette personne t’a préparé quoi ??</h2>
+  <div class="chips" id="guessChips">
+    <button type="button" class="chip">Un message ?</button>
+    <button type="button" class="chip">Des fleurs ?</button>
+    <button type="button" class="chip">Un gâteau ?</button>
+    <button type="button" class="chip">Plus que ça…</button>
+  </div>
+  <button class="btn gold hidden" id="afterGuess" data-next="eyes">Je veux savoir</button>
+</section>
 
-  <section class="screen" data-screen="eyes">
-    <p class="eyebrow">Moment magique</p>
-    <h2 class="big">Ferme tes yeux…</h2>
-    <p class="lead">Puis appuie sur le bouton.<br/>Et ouvre-les lentement.</p>
-    <button class="btn gold huge" data-next="flowers" id="eyesBtn">J’ai fermé les yeux — j’appuie</button>
-  </section>
+<section class="screen" data-screen="eyes">
+  <p class="eyebrow">Moment magique</p>
+  <h2 class="big">Ferme tes yeux…</h2>
+  <p class="lead">Puis appuie. Et ouvre-les lentement.</p>
+  <button class="btn gold huge" data-next="flowers" id="eyesBtn">J’ai fermé les yeux — j’appuie</button>
+</section>
 
-  <section class="screen reveal" data-screen="flowers">
-    <div class="petals" id="petals"></div>
-    <p class="eyebrow wow">Waouh…</p>
-    <h2>Des fleurs pour toi</h2>
-    <p class="lead">Un jardin entier, rien que pour Maimouna.</p>
-    <img class="hero-img" src="https://cdn.jsdelivr.net/gh/abdraman9013-spec/cadeau-maimouna@main/assets/fleurs-maimouna.jpg" alt="Bouquet royal pour Maimouna" />
-    <button class="btn gold" data-next="chocolates">Continuer le cadeau</button>
-  </section>
+<section class="screen" data-screen="flowers">
+  <p class="eyebrow wow">Waouh…</p>
+  <h2>Des fleurs pour toi</h2>
+  <p class="lead">Un jardin entier, rien que pour Maimouna.</p>
+  <img class="hero-img" data-cdn="fleurs-maimouna.jpg" alt="Fleurs" />
+  <button class="btn gold" data-next="chocolates">Encore… les chocolats</button>
+</section>
 
-  <section class="screen reveal" data-screen="chocolates">
-    <p class="eyebrow wow">Encore…</p>
-    <h2>Plein de chocolats</h2>
-    <p class="lead">Comme une boîte de luxe ouverte juste pour toi.</p>
-    <img class="hero-img" src="https://cdn.jsdelivr.net/gh/abdraman9013-spec/cadeau-maimouna@main/assets/chocolats-maimouna.jpg" alt="Chocolats de luxe" />
-    <button class="btn gold" data-next="queen">Et ce n’est pas fini</button>
-  </section>
+<section class="screen" data-screen="chocolates">
+  <p class="eyebrow wow">Encore…</p>
+  <h2>Plein de chocolats</h2>
+  <p class="lead">Comme une boîte de luxe ouverte juste pour toi.</p>
+  <img class="hero-img" data-cdn="chocolats-maimouna.jpg" alt="Chocolats" />
+  <button class="btn gold" data-next="queen">Et la couronne</button>
+</section>
 
-  <section class="screen reveal" data-screen="queen">
-    <p class="eyebrow wow">Couronne</p>
-    <h2>Parce que tu es une reine</h2>
-    <p class="lead">MAIMOUNA AZIBERT TAHA — aujourd’hui, le monde t’appartient.</p>
-    <img class="hero-img" src="https://cdn.jsdelivr.net/gh/abdraman9013-spec/cadeau-maimouna@main/assets/reine-maimouna.jpg" alt="Couronne dorée" />
-    <button class="btn gold" data-next="cake">Voir le gâteau</button>
-  </section>
+<section class="screen" data-screen="queen">
+  <p class="eyebrow wow">Couronne</p>
+  <h2>Parce que tu es une reine</h2>
+  <p class="lead">MAIMOUNA AZIBERT TAHA — aujourd’hui, le monde t’appartient.</p>
+  <img class="hero-img" data-cdn="reine-maimouna.jpg" alt="Reine" />
+  <button class="btn gold" data-next="cake">Voir ton gâteau</button>
+</section>
 
-  <section class="screen reveal" data-screen="cake">
-    <p class="eyebrow wow">Joyeux anniversaire</p>
-    <h2>Ton gâteau royal</h2>
-    <p class="lead">18 juillet 2006 → aujourd’hui, ton jour.</p>
-    <img class="hero-img" src="https://cdn.jsdelivr.net/gh/abdraman9013-spec/cadeau-maimouna@main/assets/gateau-maimouna.jpg" alt="Gâteau d'anniversaire" />
-    <div class="name-banner">Joyeux Anniversaire<br/><strong>Maimouna</strong></div>
-    <button class="btn gold" data-next="dreams">Le jeu des rêves →</button>
-  </section>
+<section class="screen" data-screen="cake">
+  <p class="eyebrow wow">Joyeux anniversaire</p>
+  <h2>Ton gâteau royal</h2>
+  <p class="lead">18 juillet 2006 → aujourd’hui, ton jour.</p>
+  <img class="hero-img" data-cdn="gateau-maimouna.jpg" alt="Gateau" />
+  <div class="name-banner">Joyeux Anniversaire<br/><strong>Maimouna</strong></div>
+  <button class="btn gold" data-next="wishes">Lire tous mes souhaits</button>
+</section>
 
-  <section class="screen" data-screen="dreams">
-    <p class="eyebrow">Rêves</p>
-    <h2>Dans ta vie, dans ton rêve…<br/>tu veux quoi&nbsp;?</h2>
-    <p class="lead">Touche un rêve. Chaque choix a une surprise waouh avec ton nom.</p>
-    <div class="dream-grid" id="dreamGrid">
-      <button class="dream" data-dream="voiture">Voiture</button>
-      <button class="dream" data-dream="maison">Maison</button>
-      <button class="dream" data-dream="iphone">iPhone</button>
-      <button class="dream" data-dream="voyage">Voyage</button>
-      <button class="dream" data-dream="bijoux">Bijoux</button>
-      <button class="dream" data-dream="bonheur">Bonheur</button>
-    </div>
-    <p class="hint">Explore plusieurs rêves… puis va jusqu’au message final.</p>
-    <button class="btn soft hidden" id="toLetter" data-next="letter">Lire le message d’AAG →</button>
-  </section>
+<section class="screen" data-screen="wishes">
+  <p class="eyebrow wow">Souhaits</p>
+  <h2>Tout ce que je te souhaite</h2>
+  <p class="lead wide">Lis lentement. Chaque ligne est pour toi.</p>
+  <div class="wish-list">
+    <div class="wish">🤍 Que ton cœur reste léger, même les jours lourds. Tu mérites la paix.</div>
+    <div class="wish">✨ Que ton sourire ne s’éteigne jamais — il éclaire plus que tu ne le crois.</div>
+    <div class="wish">🌙 Que chaque rêve que tu touches devient un jour une réalité.</div>
+    <div class="wish">🌿 Que ta santé soit solide, ta force douce, et ta joie immense.</div>
+    <div class="wish">🌍 Que les distances ne cassent jamais ce qui est vrai entre les gens.</div>
+    <div class="wish">💛 Que cette année te donne plus d’amour, plus de réussite, plus de lumière.</div>
+    <div class="wish">👑 Que tu te sentes toujours importante — parce que tu l’es.</div>
+    <div class="wish">🕊️ Que tu n’oublies jamais : quelqu’un pense à toi, tous les jours, depuis la Hongrie.</div>
+  </div>
+  <button class="btn gold" data-next="dreams">Continuer vers tes rêves</button>
+</section>
 
-  <section class="screen reveal" data-screen="dreamDetail">
-    <button class="back" id="backDreams" type="button">← Autres rêves</button>
-    <p class="eyebrow wow" id="dreamEyebrow">Cadeau rêve</p>
-    <h2 id="dreamTitle">Pour Maimouna</h2>
-    <p class="lead" id="dreamText"></p>
-    <div class="video-wrap">
-      <iframe id="dreamVideo" title="Rêve Maimouna" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-    <div class="name-overlay">Cadeau pour<br/><span>MAIMOUNA AZIBERT TAHA</span><br/><small>de la part d’AAG</small></div>
-    <button class="btn gold" id="moreDreams" type="button">Choisir un autre rêve</button>
-  </section>
+<section class="screen" data-screen="dreams">
+  <p class="eyebrow">Rêves</p>
+  <h2>Dans ta vie, dans ton rêve…<br/>tu veux quoi ?</h2>
+  <p class="lead">Touche un rêve. Chaque choix a une surprise avec ton nom.</p>
+  <div class="dream-grid">
+    <button class="dream" data-dream="voiture">Voiture</button>
+    <button class="dream" data-dream="maison">Maison</button>
+    <button class="dream" data-dream="iphone">iPhone</button>
+    <button class="dream" data-dream="voyage">Voyage</button>
+    <button class="dream" data-dream="bijoux">Bijoux</button>
+    <button class="dream" data-dream="bonheur">Bonheur</button>
+  </div>
+  <p class="hint">Explore plusieurs rêves… le message d’AAG t’attend après.</p>
+  <button class="btn soft hidden" id="toLetter" data-next="letter">Lire le long message d’AAG</button>
+</section>
 
-  <section class="screen" data-screen="letter">
-    <p class="eyebrow">Message final</p>
-    <h2>Pour toi, Maimouna</h2>
-    <article class="letter">
-      <p>Même à des milliers de kilomètres — toi au Tchad, moi en Hongrie — tu restes une des personnes les plus importantes de ma vie.</p>
-      <p>On n’est ni couple, ni famille… et pourtant on se parle tous les jours. Ça, c’est rare. Ça, c’est précieux.</p>
-      <p>Joyeux anniversaire, <strong>Maimouna Azibert Taha</strong>.</p>
-      <p>Que cette année t’apporte tout ce que tu touches dans ce cadeau : les fleurs, la douceur, la couronne, et surtout tes rêves.</p>
-      <p class="sign">— AAG</p>
-    </article>
-    <button class="btn gold" data-next="finale">Un dernier waouh</button>
-  </section>
+<section class="screen" data-screen="dreamDetail">
+  <button class="back" id="backDreams" type="button">Autres rêves</button>
+  <p class="eyebrow wow" id="dreamEyebrow">Cadeau rêve</p>
+  <h2 id="dreamTitle">Pour Maimouna</h2>
+  <p class="lead" id="dreamText"></p>
+  <div class="video-wrap">
+    <iframe id="dreamVideo" title="Reve" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+  <div class="name-overlay">Cadeau pour<br/><span>MAIMOUNA AZIBERT TAHA</span><br/><small>de la part d’AAG</small></div>
+  <button class="btn gold" id="moreDreams" type="button">Choisir un autre rêve</button>
+  <button class="btn soft" data-next="letter">Ou lire le message maintenant</button>
+</section>
 
-  <section class="screen" data-screen="finale">
-    <div class="glow"></div>
-    <p class="eyebrow">Toujours</p>
-    <h1 class="hero-name">Maimouna</h1>
-    <p class="sub">Ce cadeau est juste pour toi.</p>
-    <p class="lead">18 juillet · Joyeux anniversaire<br/>N’oublie jamais cette nuit.</p>
-    <p class="sign big-sign">AAG</p>
-    <button class="btn soft" data-next="intro">Revivre le cadeau</button>
-  </section>
+<section class="screen" data-screen="letter">
+  <p class="eyebrow">Message d’AAG</p>
+  <h2>Pour toi, Maimouna</h2>
+  <article class="letter">
+    <p>Maimouna Azibert Taha,</p>
+    <p>Même à des milliers de kilomètres — toi au Tchad, moi en Hongrie — tu restes une des personnes les plus importantes de ma vie. 🤍</p>
+    <p>On n’est ni couple, ni famille… et pourtant on se parle tous les jours. Ça, c’est rare. Ça, c’est précieux. Ça, ça compte. ✨</p>
+    <p>Aujourd’hui, pour ton anniversaire, je voulais que tu sentes quelque chose de vrai : que tu n’es pas seule, que ton existence touche quelqu’un, et que ton rire traverse les frontières. 🌍</p>
+    <p>Je te souhaite une année pleine de douceur. Une année où tu te sens belle sans demander la permission. Une année où tes larmes deviennent de la force, et où tes rêves refusent d’attendre. 🌙</p>
+    <p>Je te souhaite de l’amour sincère. Des amies vraies. Une famille qui te protège. Un cœur qui ne se fatigue pas d’espérer. 💛</p>
+    <p>Je te souhaite la réussite — pas seulement l’argent, mais la fierté. Celle de te regarder et de te dire : j’avance. 🌟</p>
+    <p>Je te souhaite des voyages, des portes qui s’ouvrent, des jours où tu danses même sans musique. ✈️</p>
+    <p>Je te souhaite la santé, la paix, et cette petite lumière que personne ne peut t’enlever. 🕊️</p>
+    <p>Et surtout, Maimouna… je te souhaite de ne jamais oublier ta valeur. Tu es une reine. Pas parce que je le dis. Parce que tu l’es. 👑</p>
+    <p>Joyeux anniversaire. Que cette nuit reste gravée en toi, comme un souvenir doux que tu pourras rouvrir quand tu veux. 🎂</p>
+    <p class="sign">— AAG</p>
+  </article>
+  <button class="btn gold" data-next="encore">Ce n’est pas fini…</button>
+</section>
 
-  <script src="https://cdn.jsdelivr.net/gh/abdraman9013-spec/cadeau-maimouna@main/app.js"></script>
+<section class="screen" data-screen="encore">
+  <p class="eyebrow wow">Encore pour toi</p>
+  <h2>Parce que tu mérites encore plus</h2>
+  <div class="wish-list">
+    <div class="wish">☀️ Que chaque matin te dise : tu vas y arriver.</div>
+    <div class="wish">🌙 Que chaque soir te rappelle : tu as été courageuse.</div>
+    <div class="wish">🩷 Que ton prénom soit toujours dit avec tendresse.</div>
+    <div class="wish">🚀 Que ton avenir soit plus grand que ta peur.</div>
+    <div class="wish">🎉 Que ton anniversaire soit le début d’une année inoubliable.</div>
+    <div class="wish">🤍 Et que tu saches — vraiment — qu’AAG pense à toi.</div>
+  </div>
+  <button class="btn gold" data-next="finale">Dernière page</button>
+</section>
+
+<section class="screen" data-screen="finale">
+  <div class="glow"></div>
+  <p class="eyebrow">Toujours</p>
+  <h1 class="hero-name">Maimouna</h1>
+  <p class="sub">Ce cadeau est juste pour toi.</p>
+  <p class="lead wide">18 juillet · Joyeux anniversaire.<br/>N’oublie jamais cette nuit.</p>
+  <p class="sign big-sign">AAG</p>
+  <button class="btn soft" data-next="wishes">Relire les souhaits</button>
+  <button class="btn gold" data-next="dreams">Rejouer les rêves</button>
+  <button class="btn soft" data-next="letter">Relire le message</button>
+</section>
+
+<script>
+
+(() => {
+  const screens = [...document.querySelectorAll(".screen")];
+  const progress = document.querySelector("#progress span");
+  const order = [
+    "intro","game1","game2","gameNext","game3","question","eyes",
+    "flowers","chocolates","queen","cake","wishes","dreams","dreamDetail",
+    "letter","encore","finale"
+  ];
+  const CDN = "https://cdn.jsdelivr.net/gh/abdraman9013-spec/cadeau-maimouna@main";
+  const dreams = {
+    voiture: {
+      title: "Ta voiture de reve",
+      text: "La plus belle voiture du monde... avec ton nom dessus. Pour toi, Maimouna.",
+      video: "https://www.youtube.com/embed/uqjAfD2xYiU?autoplay=1&rel=0&modestbranding=1"
+    },
+    maison: {
+      title: "Ta maison de reve",
+      text: "Une demeure digne d'une reine. Imagine ton nom sur la porte.",
+      video: "https://www.youtube.com/embed/6IwZhvgoPZM?autoplay=1&rel=0&modestbranding=1"
+    },
+    iphone: {
+      title: "Ton iPhone de reve",
+      text: "Le plus beau telephone... grave mentalement : MAIMOUNA AZIBERT TAHA.",
+      video: "https://www.youtube.com/embed/XHTrLYSh8q4?autoplay=1&rel=0&modestbranding=1"
+    },
+    voyage: {
+      title: "Ton voyage de reve",
+      text: "Des horizons, des lumieres, et toi au centre. Le monde t'attend.",
+      video: "https://www.youtube.com/embed/LXb3EKWsInQ?autoplay=1&rel=0&modestbranding=1"
+    },
+    bijoux: {
+      title: "Tes bijoux de reine",
+      text: "Or, diamants, eclat... parce qu'une reine merite de briller.",
+      video: "https://www.youtube.com/embed/f7L97YKqT-4?autoplay=1&rel=0&modestbranding=1"
+    },
+    bonheur: {
+      title: "Ton bonheur infini",
+      text: "Un coeur leger, des jours doux, et quelqu'un qui pense a toi chaque jour.",
+      video: "https://www.youtube.com/embed/ZbZSe6N_BXs?autoplay=1&rel=0&modestbranding=1"
+    }
+  };
+  let visitedDreams = 0;
+  function go(name) {
+    const target = document.querySelector('[data-screen="' + name + '"]');
+    if (!target) return;
+    screens.forEach((s) => s.classList.remove("active"));
+    target.classList.add("active");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    const idx = Math.max(0, order.indexOf(name));
+    progress.style.width = Math.round(((idx + 1) / order.length) * 100) + "%";
+    if (name === "flowers" || name === "wishes" || name === "encore") spawnPetals(28);
+    if (["cake","queen","chocolates","letter","finale"].includes(name)) burst();
+    if (name !== "dreamDetail") stopVideo();
+  }
+  function burst() {
+    const fx = document.getElementById("fx");
+    const el = document.createElement("div");
+    el.className = "burst";
+    fx.appendChild(el);
+    setTimeout(() => el.remove(), 850);
+  }
+  function spawnPetals(n) {
+    const box = document.getElementById("petals");
+    if (!box) return;
+    box.innerHTML = "";
+    for (let i = 0; i < n; i++) {
+      const p = document.createElement("span");
+      p.className = "petal";
+      p.style.left = Math.random() * 100 + "%";
+      p.style.animationDuration = 4 + Math.random() * 5 + "s";
+      p.style.animationDelay = Math.random() * 1.5 + "s";
+      box.appendChild(p);
+    }
+    setTimeout(() => { box.innerHTML = ""; }, 9000);
+  }
+  function stopVideo() {
+    const iframe = document.getElementById("dreamVideo");
+    if (iframe) iframe.src = "";
+  }
+  document.querySelectorAll("[data-next]").forEach((btn) => {
+    btn.addEventListener("click", () => { burst(); go(btn.getAttribute("data-next")); });
+  });
+  document.querySelectorAll("#guessChips .chip").forEach((chip) => {
+    chip.addEventListener("click", () => {
+      document.querySelectorAll("#guessChips .chip").forEach((c) => c.classList.remove("selected"));
+      chip.classList.add("selected");
+      document.getElementById("afterGuess").classList.remove("hidden");
+      burst();
+    });
+  });
+  const toLetter = document.getElementById("toLetter");
+  document.querySelectorAll(".dream").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const data = dreams[btn.getAttribute("data-dream")];
+      if (!data) return;
+      document.getElementById("dreamEyebrow").textContent = "Waouh - cadeau reve";
+      document.getElementById("dreamTitle").textContent = data.title;
+      document.getElementById("dreamText").textContent = data.text;
+      document.getElementById("dreamVideo").src = data.video;
+      visitedDreams += 1;
+      toLetter.classList.remove("hidden");
+      toLetter.textContent = visitedDreams >= 2
+        ? "Lire le long message d'AAG"
+        : "Encore un reve... ou lire le message";
+      burst();
+      go("dreamDetail");
+    });
+  });
+  document.getElementById("backDreams").addEventListener("click", () => { stopVideo(); go("dreams"); });
+  document.getElementById("moreDreams").addEventListener("click", () => { stopVideo(); go("dreams"); });
+  document.getElementById("eyesBtn").addEventListener("click", () => spawnPetals(22));
+  progress.style.width = Math.round((1 / order.length) * 100) + "%";
+  // warm image paths
+  document.querySelectorAll("img[data-cdn]").forEach((img) => {
+    img.src = CDN + "/assets/" + img.getAttribute("data-cdn");
+  });
+})();
+
+</script>
 </body>
 </html>
