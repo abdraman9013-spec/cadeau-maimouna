@@ -438,6 +438,7 @@ h2.big {
   <h1 class="hero-name">Maimouna</h1>
   <p class="sub">Azibert Taha</p>
   <p class="lead wide">Quelqu’un a préparé quelque chose juste pour toi. Prends ton temps… chaque page est un cadeau.</p>
+  <p class="hint">Active le son du téléphone — il y a une voix douce et des applaudissements.</p>
   <button class="btn gold" data-next="game1">Ouvrir le cadeau</button>
 </section>
 
@@ -548,7 +549,7 @@ h2.big {
     <button class="dream" data-dream="iphone">iPhone</button>
     <button class="dream" data-dream="voyage">Voyage</button>
     <button class="dream" data-dream="bijoux">Bijoux</button>
-    <button class="dream" data-dream="bonheur">Bonheur</button>
+      <button class="dream" data-dream="bonheur">Bonheur · Dadju</button>
   </div>
   <p class="hint">Explore plusieurs rêves… le message d’AAG t’attend après.</p>
   <button class="btn soft hidden" id="toLetter" data-next="letter">Lire le long message d’AAG</button>
@@ -624,39 +625,90 @@ h2.big {
     "letter","encore","finale"
   ];
   const CDN = "https://cdn.jsdelivr.net/gh/abdraman9013-spec/cadeau-maimouna@main";
+  const YT = (id) => "https://www.youtube.com/embed/" + id + "?autoplay=1&rel=0&modestbranding=1&playsinline=1";
+  // Videos verified via YouTube oEmbed (real Dubai / luxury / Dadju)
   const dreams = {
     voiture: {
-      title: "Ta voiture de reve",
-      text: "La plus belle voiture du monde... avec ton nom dessus. Pour toi, Maimouna.",
-      video: "https://www.youtube.com/embed/uqjAfD2xYiU?autoplay=1&rel=0&modestbranding=1"
+      title: "Tes supercars a Dubai",
+      text: "Les plus belles voitures du monde, dans les rues de Dubai. Avec ton nom en pensee : Maimouna.",
+      video: YT("fZm-pFIqKYA")
     },
     maison: {
-      title: "Ta maison de reve",
-      text: "Une demeure digne d'une reine. Imagine ton nom sur la porte.",
-      video: "https://www.youtube.com/embed/6IwZhvgoPZM?autoplay=1&rel=0&modestbranding=1"
+      title: "Ta villa Palm Jumeirah",
+      text: "Une vraie demeure de reve a Dubai, digne d'une reine. Imagine ton nom sur la porte.",
+      video: YT("UnFoKho-aio")
     },
     iphone: {
-      title: "Ton iPhone de reve",
-      text: "Le plus beau telephone... grave mentalement : MAIMOUNA AZIBERT TAHA.",
-      video: "https://www.youtube.com/embed/XHTrLYSh8q4?autoplay=1&rel=0&modestbranding=1"
+      title: "Ton luxe a Dubai Mall",
+      text: "Shopping de reve a Dubai. L'iPhone, la mode, le luxe... pour MAIMOUNA AZIBERT TAHA.",
+      video: YT("baiwtPJJDF4")
     },
     voyage: {
-      title: "Ton voyage de reve",
-      text: "Des horizons, des lumieres, et toi au centre. Le monde t'attend.",
-      video: "https://www.youtube.com/embed/LXb3EKWsInQ?autoplay=1&rel=0&modestbranding=1"
+      title: "Dubai t'attend",
+      text: "Burj Khalifa, Palm Jumeirah, la vraie vie de reve. Et un jour Istanbul aussi...",
+      video: YT("0TyrhDJOu54")
     },
     bijoux: {
-      title: "Tes bijoux de reine",
-      text: "Or, diamants, eclat... parce qu'une reine merite de briller.",
-      video: "https://www.youtube.com/embed/f7L97YKqT-4?autoplay=1&rel=0&modestbranding=1"
+      title: "Tes bijoux a Dubai",
+      text: "Le Gold Souk de Dubai : or, diamants, eclat. Parce qu'une reine merite de briller.",
+      video: YT("R0bhLrmEsqk")
     },
     bonheur: {
-      title: "Ton bonheur infini",
-      text: "Un coeur leger, des jours doux, et quelqu'un qui pense a toi chaque jour.",
-      video: "https://www.youtube.com/embed/ZbZSe6N_BXs?autoplay=1&rel=0&modestbranding=1"
+      title: "Par amour — Dadju",
+      text: "Ta chanson. Douce. Pour toi, Maimouna. Par amour.",
+      video: YT("RnhdOKUlbWU")
     }
   };
   let visitedDreams = 0;
+  let audioReady = false;
+  const applause = new Audio("https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3");
+  applause.volume = 0.55;
+  const applause2 = new Audio("https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3");
+  applause2.volume = 0.45;
+
+  const birthdayLines = [
+    "Joyeux anniversaire Maimouna",
+    "Joyeux anniversaire Mai mou na",
+    "Joyeux anniversaire, Maimouna Azibert Taha",
+    "Joyeux anniversaire ma belle Maimouna"
+  ];
+  let lineIdx = 0;
+
+  function unlockAudio() {
+    audioReady = true;
+    try { applause.load(); applause2.load(); } catch (e) {}
+  }
+
+  function speakBirthday(soft) {
+    if (!audioReady || !window.speechSynthesis) return;
+    try {
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(birthdayLines[lineIdx % birthdayLines.length]);
+      lineIdx += 1;
+      u.lang = "fr-FR";
+      u.rate = soft ? 0.88 : 0.95;
+      u.pitch = 1.15;
+      u.volume = soft ? 0.65 : 0.8;
+      const voices = window.speechSynthesis.getVoices();
+      const fr = voices.find((v) => /fr(-|_|$)/i.test(v.lang) && /female|google|hortense|julie|marie|amelie/i.test(v.name))
+        || voices.find((v) => /fr(-|_|$)/i.test(v.lang));
+      if (fr) u.voice = fr;
+      window.speechSynthesis.speak(u);
+    } catch (e) {}
+  }
+
+  function playApplause() {
+    if (!audioReady) return;
+    try {
+      applause.currentTime = 0;
+      applause.play().catch(() => {});
+      setTimeout(() => {
+        applause2.currentTime = 0;
+        applause2.play().catch(() => {});
+      }, 350);
+    } catch (e) {}
+  }
+
   function go(name) {
     const target = document.querySelector('[data-screen="' + name + '"]');
     if (!target) return;
@@ -665,8 +717,16 @@ h2.big {
     window.scrollTo({ top: 0, behavior: "smooth" });
     const idx = Math.max(0, order.indexOf(name));
     progress.style.width = Math.round(((idx + 1) / order.length) * 100) + "%";
-    if (name === "flowers" || name === "wishes" || name === "encore") spawnPetals(28);
-    if (["cake","queen","chocolates","letter","finale"].includes(name)) burst();
+    if (name === "flowers" || name === "wishes" || name === "encore" || name === "cake") {
+      spawnPetals(28);
+      playApplause();
+      speakBirthday(true);
+    }
+    if (["queen","chocolates","letter","finale","intro"].includes(name)) {
+      burst();
+      if (name !== "intro") speakBirthday(true);
+    }
+    if (name === "eyes" || name === "question") speakBirthday(true);
     if (name !== "dreamDetail") stopVideo();
   }
   function burst() {
@@ -695,22 +755,29 @@ h2.big {
     if (iframe) iframe.src = "";
   }
   document.querySelectorAll("[data-next]").forEach((btn) => {
-    btn.addEventListener("click", () => { burst(); go(btn.getAttribute("data-next")); });
+    btn.addEventListener("click", () => {
+      unlockAudio();
+      burst();
+      go(btn.getAttribute("data-next"));
+    });
   });
   document.querySelectorAll("#guessChips .chip").forEach((chip) => {
     chip.addEventListener("click", () => {
+      unlockAudio();
       document.querySelectorAll("#guessChips .chip").forEach((c) => c.classList.remove("selected"));
       chip.classList.add("selected");
       document.getElementById("afterGuess").classList.remove("hidden");
       burst();
+      speakBirthday(true);
     });
   });
   const toLetter = document.getElementById("toLetter");
   document.querySelectorAll(".dream").forEach((btn) => {
     btn.addEventListener("click", () => {
+      unlockAudio();
       const data = dreams[btn.getAttribute("data-dream")];
       if (!data) return;
-      document.getElementById("dreamEyebrow").textContent = "Waouh - cadeau reve";
+      document.getElementById("dreamEyebrow").textContent = "Waouh — vrai cadeau rêve";
       document.getElementById("dreamTitle").textContent = data.title;
       document.getElementById("dreamText").textContent = data.text;
       document.getElementById("dreamVideo").src = data.video;
@@ -718,16 +785,23 @@ h2.big {
       toLetter.classList.remove("hidden");
       toLetter.textContent = visitedDreams >= 2
         ? "Lire le long message d'AAG"
-        : "Encore un reve... ou lire le message";
+        : "Encore un rêve... ou lire le message";
       burst();
+      if (btn.getAttribute("data-dream") !== "bonheur") speakBirthday(true);
       go("dreamDetail");
     });
   });
   document.getElementById("backDreams").addEventListener("click", () => { stopVideo(); go("dreams"); });
   document.getElementById("moreDreams").addEventListener("click", () => { stopVideo(); go("dreams"); });
-  document.getElementById("eyesBtn").addEventListener("click", () => spawnPetals(22));
+  document.getElementById("eyesBtn").addEventListener("click", () => {
+    unlockAudio();
+    spawnPetals(22);
+    playApplause();
+  });
+  if (window.speechSynthesis) {
+    window.speechSynthesis.onvoiceschanged = () => {};
+  }
   progress.style.width = Math.round((1 / order.length) * 100) + "%";
-  // warm image paths
   document.querySelectorAll("img[data-cdn]").forEach((img) => {
     img.src = CDN + "/assets/" + img.getAttribute("data-cdn");
   });
