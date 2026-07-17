@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/abdraman9013-spec/cadeau-maimouna@main/styles.css" />
 </head>
 <body>
   <div id="fx" aria-hidden="true"></div>
@@ -17,54 +17,54 @@
   <!-- 0 INTRO -->
   <section class="screen active" data-screen="intro">
     <div class="glow"></div>
-    <p class="eyebrow">18 juillet · Cadeau secret</p>
+    <p class="eyebrow">18 juillet Â· Cadeau secret</p>
     <h1 class="hero-name">Maimouna</h1>
     <p class="sub">Azibert Taha</p>
-    <p class="lead">Quelqu’un a préparé quelque chose juste pour toi.<br/>Ce n’est pas un simple message…</p>
+    <p class="lead">Quelquâ€™un a prÃ©parÃ© quelque chose juste pour toi.<br/>Ce nâ€™est pas un simple messageâ€¦</p>
     <button class="btn gold" data-next="game1">Ouvrir le cadeau</button>
   </section>
 
   <!-- GAME 1 -->
   <section class="screen" data-screen="game1">
-    <p class="eyebrow">Étape 1 / 3</p>
+    <p class="eyebrow">Ã‰tape 1 / 3</p>
     <h2>Touche le <span class="accent">1</span></h2>
-    <p class="lead">Fais attention… chaque touche ouvre une porte.</p>
+    <p class="lead">Fais attentionâ€¦ chaque touche ouvre une porte.</p>
     <button class="orb" data-next="game2" aria-label="Toucher 1">1</button>
   </section>
 
   <!-- GAME 2 -->
   <section class="screen" data-screen="game2">
-    <p class="eyebrow">Étape 2 / 3</p>
+    <p class="eyebrow">Ã‰tape 2 / 3</p>
     <h2>Maintenant le <span class="accent">2</span></h2>
-    <p class="lead">Tu es déjà plus proche du secret.</p>
+    <p class="lead">Tu es dÃ©jÃ  plus proche du secret.</p>
     <button class="orb" data-next="gameNext" aria-label="Toucher 2">2</button>
   </section>
 
   <!-- GAME NEXT -->
   <section class="screen" data-screen="gameNext">
-    <p class="eyebrow">Presque…</p>
+    <p class="eyebrow">Presqueâ€¦</p>
     <h2>Page suivante</h2>
-    <p class="lead">Continue. Le vrai cadeau n’est pas encore là.</p>
-    <button class="btn gold" data-next="game3">Page suivante →</button>
+    <p class="lead">Continue. Le vrai cadeau nâ€™est pas encore lÃ .</p>
+    <button class="btn gold" data-next="game3">Page suivante â†’</button>
   </section>
 
   <!-- GAME 3 -->
   <section class="screen" data-screen="game3">
-    <p class="eyebrow">Étape 3 / 3</p>
+    <p class="eyebrow">Ã‰tape 3 / 3</p>
     <h2>Dernier chiffre : <span class="accent">3</span></h2>
-    <p class="lead">Après ça… la question.</p>
+    <p class="lead">AprÃ¨s Ã§aâ€¦ la question.</p>
     <button class="orb pulse" data-next="question" aria-label="Toucher 3">3</button>
   </section>
 
   <!-- QUESTION -->
   <section class="screen" data-screen="question">
     <p class="eyebrow">Question</p>
-    <h2 class="big">Tu penses que cette personne t’a préparé quoi&nbsp;??</h2>
+    <h2 class="big">Tu penses que cette personne tâ€™a prÃ©parÃ© quoi&nbsp;??</h2>
     <div class="chips" id="guessChips">
       <button type="button" class="chip">Un message ?</button>
       <button type="button" class="chip">Des fleurs ?</button>
-      <button type="button" class="chip">Un gâteau ?</button>
-      <button type="button" class="chip">Plus que ça…</button>
+      <button type="button" class="chip">Un gÃ¢teau ?</button>
+      <button type="button" class="chip">Plus que Ã§aâ€¦</button>
     </div>
     <button class="btn gold hidden" id="afterGuess" data-next="eyes">Je veux savoir</button>
   </section>
@@ -72,77 +72,77 @@
   <!-- EYES -->
   <section class="screen" data-screen="eyes">
     <p class="eyebrow">Moment magique</p>
-    <h2 class="big">Ferme tes yeux…</h2>
+    <h2 class="big">Ferme tes yeuxâ€¦</h2>
     <p class="lead">Puis appuie sur le bouton.<br/>Et ouvre-les lentement.</p>
-    <button class="btn gold huge" data-next="flowers" id="eyesBtn">J’ai fermé les yeux — j’appuie</button>
+    <button class="btn gold huge" data-next="flowers" id="eyesBtn">Jâ€™ai fermÃ© les yeux â€” jâ€™appuie</button>
   </section>
 
   <!-- FLOWERS -->
   <section class="screen reveal" data-screen="flowers">
     <div class="petals" id="petals"></div>
-    <p class="eyebrow wow">Waouh…</p>
+    <p class="eyebrow wow">Waouhâ€¦</p>
     <h2>Des fleurs pour toi</h2>
     <p class="lead">Un jardin entier, rien que pour Maimouna.</p>
-    <img class="hero-img" src="assets/fleurs-maimouna.jpg" alt="Bouquet royal pour Maimouna" />
+    <img class="hero-img" src="https://cdn.jsdelivr.net/gh/abdraman9013-spec/cadeau-maimouna@main/assets/fleurs-maimouna.jpg" alt="Bouquet royal pour Maimouna" />
     <button class="btn gold" data-next="chocolates">Continuer le cadeau</button>
   </section>
 
   <!-- CHOCOLATES -->
   <section class="screen reveal" data-screen="chocolates">
-    <p class="eyebrow wow">Encore…</p>
+    <p class="eyebrow wow">Encoreâ€¦</p>
     <h2>Plein de chocolats</h2>
-    <p class="lead">Comme une boîte de luxe ouverte juste pour toi.</p>
-    <img class="hero-img" src="assets/chocolats-maimouna.jpg" alt="Chocolats de luxe" />
-    <button class="btn gold" data-next="queen">Et ce n’est pas fini</button>
+    <p class="lead">Comme une boÃ®te de luxe ouverte juste pour toi.</p>
+    <img class="hero-img" src="https://cdn.jsdelivr.net/gh/abdraman9013-spec/cadeau-maimouna@main/assets/chocolats-maimouna.jpg" alt="Chocolats de luxe" />
+    <button class="btn gold" data-next="queen">Et ce nâ€™est pas fini</button>
   </section>
 
   <!-- QUEEN -->
   <section class="screen reveal" data-screen="queen">
     <p class="eyebrow wow">Couronne</p>
     <h2>Parce que tu es une reine</h2>
-    <p class="lead">MAIMOUNA AZIBERT TAHA — aujourd’hui, le monde t’appartient.</p>
-    <img class="hero-img" src="assets/reine-maimouna.jpg" alt="Couronne dorée" />
-    <button class="btn gold" data-next="cake">Voir le gâteau</button>
+    <p class="lead">MAIMOUNA AZIBERT TAHA â€” aujourdâ€™hui, le monde tâ€™appartient.</p>
+    <img class="hero-img" src="https://cdn.jsdelivr.net/gh/abdraman9013-spec/cadeau-maimouna@main/assets/reine-maimouna.jpg" alt="Couronne dorÃ©e" />
+    <button class="btn gold" data-next="cake">Voir le gÃ¢teau</button>
   </section>
 
   <!-- CAKE -->
   <section class="screen reveal" data-screen="cake">
     <p class="eyebrow wow">Joyeux anniversaire</p>
-    <h2>Ton gâteau royal</h2>
-    <p class="lead">18 juillet 2006 → aujourd’hui, ton jour.</p>
-    <img class="hero-img" src="assets/gateau-maimouna.jpg" alt="Gâteau d'anniversaire" />
+    <h2>Ton gÃ¢teau royal</h2>
+    <p class="lead">18 juillet 2006 â†’ aujourdâ€™hui, ton jour.</p>
+    <img class="hero-img" src="https://cdn.jsdelivr.net/gh/abdraman9013-spec/cadeau-maimouna@main/assets/gateau-maimouna.jpg" alt="GÃ¢teau d'anniversaire" />
     <div class="name-banner">Joyeux Anniversaire<br/><strong>Maimouna</strong></div>
-    <button class="btn gold" data-next="dreams">Le jeu des rêves →</button>
+    <button class="btn gold" data-next="dreams">Le jeu des rÃªves â†’</button>
   </section>
 
   <!-- DREAMS -->
   <section class="screen" data-screen="dreams">
-    <p class="eyebrow">Rêves</p>
-    <h2>Dans ta vie, dans ton rêve…<br/>tu veux quoi&nbsp;?</h2>
-    <p class="lead">Touche un rêve. Chaque choix a une surprise waouh avec ton nom.</p>
+    <p class="eyebrow">RÃªves</p>
+    <h2>Dans ta vie, dans ton rÃªveâ€¦<br/>tu veux quoi&nbsp;?</h2>
+    <p class="lead">Touche un rÃªve. Chaque choix a une surprise waouh avec ton nom.</p>
     <div class="dream-grid" id="dreamGrid">
-      <button class="dream" data-dream="voiture">🚗 Voiture</button>
-      <button class="dream" data-dream="maison">🏡 Maison</button>
-      <button class="dream" data-dream="iphone">📱 iPhone</button>
-      <button class="dream" data-dream="voyage">✈️ Voyage</button>
-      <button class="dream" data-dream="bijoux">💎 Bijoux</button>
-      <button class="dream" data-dream="bonheur">✨ Bonheur</button>
+      <button class="dream" data-dream="voiture">ðŸš— Voiture</button>
+      <button class="dream" data-dream="maison">ðŸ¡ Maison</button>
+      <button class="dream" data-dream="iphone">ðŸ“± iPhone</button>
+      <button class="dream" data-dream="voyage">âœˆï¸ Voyage</button>
+      <button class="dream" data-dream="bijoux">ðŸ’Ž Bijoux</button>
+      <button class="dream" data-dream="bonheur">âœ¨ Bonheur</button>
     </div>
-    <p class="hint">Explore plusieurs rêves… puis va jusqu’au message final.</p>
-    <button class="btn soft hidden" id="toLetter" data-next="letter">Lire le message d’AAG →</button>
+    <p class="hint">Explore plusieurs rÃªvesâ€¦ puis va jusquâ€™au message final.</p>
+    <button class="btn soft hidden" id="toLetter" data-next="letter">Lire le message dâ€™AAG â†’</button>
   </section>
 
   <!-- DREAM DETAIL -->
   <section class="screen reveal" data-screen="dreamDetail">
-    <button class="back" id="backDreams" type="button">← Autres rêves</button>
-    <p class="eyebrow wow" id="dreamEyebrow">Cadeau rêve</p>
+    <button class="back" id="backDreams" type="button">â† Autres rÃªves</button>
+    <p class="eyebrow wow" id="dreamEyebrow">Cadeau rÃªve</p>
     <h2 id="dreamTitle">Pour Maimouna</h2>
     <p class="lead" id="dreamText"></p>
     <div class="video-wrap">
-      <iframe id="dreamVideo" title="Rêve Maimouna" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe id="dreamVideo" title="RÃªve Maimouna" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
-    <div class="name-overlay">Cadeau pour<br/><span>MAIMOUNA AZIBERT TAHA</span><br/><small>de la part d’AAG</small></div>
-    <button class="btn gold" id="moreDreams" type="button">Choisir un autre rêve</button>
+    <div class="name-overlay">Cadeau pour<br/><span>MAIMOUNA AZIBERT TAHA</span><br/><small>de la part dâ€™AAG</small></div>
+    <button class="btn gold" id="moreDreams" type="button">Choisir un autre rÃªve</button>
   </section>
 
   <!-- LETTER -->
@@ -150,11 +150,11 @@
     <p class="eyebrow">Message final</p>
     <h2>Pour toi, Maimouna</h2>
     <article class="letter">
-      <p>Même à des milliers de kilomètres — toi au Tchad, moi en Hongrie — tu restes une des personnes les plus importantes de ma vie.</p>
-      <p>On n’est ni couple, ni famille… et pourtant on se parle tous les jours. Ça, c’est rare. Ça, c’est précieux.</p>
+      <p>MÃªme Ã  des milliers de kilomÃ¨tres â€” toi au Tchad, moi en Hongrie â€” tu restes une des personnes les plus importantes de ma vie.</p>
+      <p>On nâ€™est ni couple, ni familleâ€¦ et pourtant on se parle tous les jours. Ã‡a, câ€™est rare. Ã‡a, câ€™est prÃ©cieux.</p>
       <p>Joyeux anniversaire, <strong>Maimouna Azibert Taha</strong>.</p>
-      <p>Que cette année t’apporte tout ce que tu touches dans ce cadeau : les fleurs, la douceur, la couronne, et surtout tes rêves.</p>
-      <p class="sign">— AAG</p>
+      <p>Que cette annÃ©e tâ€™apporte tout ce que tu touches dans ce cadeau : les fleurs, la douceur, la couronne, et surtout tes rÃªves.</p>
+      <p class="sign">â€” AAG</p>
     </article>
     <button class="btn gold" data-next="finale">Un dernier waouh</button>
   </section>
@@ -165,11 +165,12 @@
     <p class="eyebrow">Toujours</p>
     <h1 class="hero-name">Maimouna</h1>
     <p class="sub">Ce cadeau est juste pour toi.</p>
-    <p class="lead">18 juillet · Joyeux anniversaire<br/>N’oublie jamais cette nuit.</p>
-    <p class="sign big-sign">AAG ♡</p>
+    <p class="lead">18 juillet Â· Joyeux anniversaire<br/>Nâ€™oublie jamais cette nuit.</p>
+    <p class="sign big-sign">AAG â™¡</p>
     <button class="btn soft" data-next="intro">Revivre le cadeau</button>
   </section>
 
-  <script src="app.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/abdraman9013-spec/cadeau-maimouna@main/app.js"></script>
 </body>
 </html>
+
