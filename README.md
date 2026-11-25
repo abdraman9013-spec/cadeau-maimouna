@@ -1,9 +1,9 @@
-# Pour toi, Maimouna
+# Pour toi, Roda
 
-Cadeau d'anniversaire interactif — 18 juillet — de **AAG**.
+Cadeau d'anniversaire interactif — **24 novembre** — pour **Hassina Bechir** (Roda), de la part de **Saleh Moussa**.
 
-## Lien à envoyer
+## Lien
 
-**https://cdn.jsdelivr.net/gh/abdraman9013-spec/cadeau-maimouna@main/index.html**
+**https://abdraman9013-spec.github.io/cadeau-maimouna/**
 
 Repo: https://github.com/abdraman9013-spec/cadeau-maimouna

@@ -9,7 +9,7 @@
   const dreams = {
     voiture: {
       title: "Ta voiture de rêve",
-      text: "La plus belle voiture du monde… avec ton nom dessus. Cadeau imaginaire pour Maimouna.",
+      text: "La plus belle voiture du monde… avec ton nom dessus : RODA.",
       video: "https://www.youtube.com/embed/uqjAfD2xYiU?autoplay=1&rel=0&modestbranding=1"
     },
     maison: {
@@ -19,12 +19,12 @@
     },
     iphone: {
       title: "Ton iPhone de rêve",
-      text: "Le plus beau téléphone… gravé mentalement : MAIMOUNA AZIBERT TAHA.",
+      text: "Le plus beau téléphone… pour HASSINA BECHIR — RODA.",
       video: "https://www.youtube.com/embed/XHTrLYSh8q4?autoplay=1&rel=0&modestbranding=1"
     },
     voyage: {
       title: "Ton voyage de rêve",
-      text: "Des horizons, des lumières, et toi au centre. Le monde t’attend, Maimouna.",
+      text: "Des horizons, des lumières, et toi au centre. Le monde t’attend, Roda.",
       video: "https://www.youtube.com/embed/LXb3EKWsInQ?autoplay=1&rel=0&modestbranding=1"
     },
     bijoux: {
@@ -116,7 +116,7 @@
       visitedDreams += 1;
       if (visitedDreams >= 2) {
         toLetter.classList.remove("hidden");
-        toLetter.textContent = "Lire le message d’AAG →";
+        toLetter.textContent = "Lire le message de Saleh →";
       } else {
         toLetter.classList.remove("hidden");
         toLetter.textContent = "Explore encore un rêve… ou lis le message →";
